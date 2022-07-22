@@ -1,7 +1,7 @@
 'use strict';
 document.body.classList.add('p-5');
 const elDiv = document.createElement('div');
-elDiv.classList.add('row');
+elDiv.classList.add(...['row', 'd-none']);
 document.body.appendChild(elDiv);
 const elDiv2 = document.createElement('div');
 elDiv2.classList.add('row');
@@ -100,6 +100,10 @@ function createUlEvenNumbers(num1, num2) {
     alert('Try again with  DIFFERENT numbers');
     return;
   }
+  if (num1 > num2) {
+    alert('Second number should be greater then first number');
+    return;
+  }
   for (let i = num1; i <= num2; i += 2) {
     let elLi = document.createElement('li');
     elUl.appendChild(elLi);
@@ -133,4 +137,20 @@ function createCard(arr) {
    <a href="${key.link}" target="_blank class="card-link">Buy now</a></div>`;
     elDiv2.appendChild(card);
   }
+}
+function createBtn() {
+  document.body.classList.add(...['m-auto', 'text-center']);
+  const startBtn = document.createElement('button');
+  startBtn.type = 'button';
+  startBtn.innerHTML = 'Click to start';
+  startBtn.setAttribute('onclick', 'start()');
+  startBtn.classList.add(...['btn', 'btn-outline-primary', 'start-btn']);
+  startBtn.style.marginTop = 20 + '%';
+  document.body.appendChild(startBtn);
+}
+function start() {
+  const startBtn = document.querySelector('.start-btn');
+  elDiv.classList.remove('d-none');
+  startBtn.classList.add('d-none');
+  document.body.classList.remove(...['m-auto', 'text-center']);
 }
