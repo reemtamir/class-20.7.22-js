@@ -89,6 +89,7 @@ function createUlObj(obj, obj2) {
 
 function createUlEvenNumbers(num1, num2) {
   let elUl = document.createElement('ul');
+  elUl.classList.add('ul');
   elDiv.appendChild(elUl);
   num1 = Number(prompt('Enter first EVEN number'));
   num2 = Number(prompt('Enter second EVEN number'));
@@ -120,6 +121,8 @@ elCardsBtn.setAttribute('onclick', 'createCard(cards)');
 elDiv.appendChild(elCardsBtn);
 function createCard(arr) {
   for (let key of arr) {
+    const elul = document.querySelector('.ul');
+    elul.classList.add('d-none');
     let card = document.createElement('div');
     card.classList.add(...['card', 'text-center', 'col']);
     card.style = 'width: 18rem';
