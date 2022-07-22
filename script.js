@@ -88,7 +88,7 @@ function createUlObj(obj, obj2) {
 }
 
 function createUlEvenNumbers(num1, num2) {
-  let elUl = document.createElement('ul');fix js
+  let elUl = document.createElement('ul');
   elDiv.appendChild(elUl);
   num1 = Number(prompt('Enter first EVEN number'));
   num2 = Number(prompt('Enter second EVEN number'));
