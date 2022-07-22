@@ -64,7 +64,7 @@ const user = {
 createUlObj(user, user.address);
 function createUlObj(obj, obj2) {
   let objList = document.createElement('ul');
-  objList.classList.add(...['text-info']);
+  objList.classList.add(...['text-info', 'fs-5']);
   elDiv.appendChild(objList);
 
   for (let key in obj) {
