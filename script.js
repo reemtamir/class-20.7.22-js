@@ -7,14 +7,14 @@ const elDiv2 = document.createElement('div');
 elDiv2.classList.add('row');
 document.body.appendChild(elDiv2);
 const elNumbersBtn = document.createElement('button');
-elNumbersBtn.type = 'button';
 elNumbersBtn.classList.add(
   ...['btn', 'btn-outline-secondary', 'col-6', 'm-auto']
 );
 elNumbersBtn.innerHTML = 'Create Even Numbers List';
 elNumbersBtn.setAttribute('onclick', 'createUlEvenNumbers()');
 elDiv.appendChild(elNumbersBtn);
-
+const ul = document.querySelector('.ul');
+elDiv.appendChild(ul);
 const cards = [
   {
     title: 'shampoo',
@@ -61,31 +61,22 @@ const user = {
     number: 666,
   },
 };
-createUlObj(user, user.address);
-function createUlObj(obj, obj2) {
-  let objList = document.createElement('ul');
-  objList.classList.add(...['text-info', 'fs-5']);
-  elDiv.appendChild(objList);
+
+function objectToUl(obj) {
+  let html = '<ul>';
 
   for (let key in obj) {
-    let li = `<li>${key} => ${
-      typeof obj[key] !== 'object' ? obj[key] : 'A new obj 👇 '
-    }</li>`;
+    typeof obj[key] === 'object'
+      ? (html += `<li> ${key} => ${objectToUl(obj[key])}</li>`)
+      : (html += `<li> ${key} => ${obj[key]} </li>`);
+  }
+  html += '</ul>';
 
-    objList.innerHTML += li;
-  }
-  let objList2 = document.createElement('ul');
-  objList2.classList.add(...['text-danger']);
-  objList.appendChild(objList2);
-  for (let key in obj2) {
-    let li = `<li>${key} => ${
-      typeof obj2[key] !== 'object' ? obj2[key] : 'A new obj 👇 '
-    }</li>`;
-    objList2.innerHTML += li;
-  }
-  objList2.innerHTML += `</ul>`;
-  objList.innerHTML += `</ul>`;
+  return html;
 }
+
+ul.innerHTML = objectToUl(user);
+ul.classList.add(...['text-info', 'fs-5']);
 
 function createUlEvenNumbers(num1, num2) {
   let elUl = document.createElement('ul');
@@ -107,13 +98,12 @@ function createUlEvenNumbers(num1, num2) {
   for (let i = num1; i <= num2; i += 2) {
     let elLi = document.createElement('li');
     elUl.appendChild(elLi);
-    elLi.innerHTML = i;
+    elLi.innerHTML += i;
   }
-  elUl.innerHTML += '</ul>';
 }
 
 const elCardsBtn = document.createElement('button');
-elCardsBtn.type = 'button';
+
 elCardsBtn.innerHTML = 'Create Cards';
 elCardsBtn.classList.add(...['btn', 'btn-outline-primary', 'col-6', 'm-auto']);
 elCardsBtn.setAttribute('onclick', 'createCard(cards)');
@@ -142,7 +132,6 @@ function createCard(arr) {
 function createBtn() {
   document.body.classList.add(...['m-auto', 'text-center']);
   const startBtn = document.createElement('button');
-  startBtn.type = 'button';
   startBtn.innerHTML = 'Click to start';
   startBtn.setAttribute('onclick', 'start()');
   startBtn.classList.add(...['btn', 'btn-outline-primary', 'start-btn']);
